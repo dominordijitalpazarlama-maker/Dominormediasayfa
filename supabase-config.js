@@ -9,8 +9,8 @@
    Verini RLS kuralları korur (KURULUM.md'de hazır).
    ========================================================= */
 
-const SUPABASE_URL = "https://SENIN-PROJEN.supabase.co";      // <-- değiştir
-const SUPABASE_ANON_KEY = "SENIN_ANON_KEY";                    // <-- değiştir
+const SUPABASE_URL = "https://clkuyrppyeuvrknbgygn.supabase.co";      // <-- değiştir
+const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNsa3V5cnBweWV1dnJrbmJneWduIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTA0Mzc1MzIsImV4cCI6MjEwNjAxMzUzMn0.Yr9mJxvdJeO1q7AF8JaaQztyUvLU1dDp17nnTdw2L1I";                    // <-- değiştir
 const GALLERY_BUCKET = "gallery";
 
 // İstemciyi oluştur (supabase-js CDN'den yüklenir)
