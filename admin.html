@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="robots" content="noindex" />
+  <title>Dominor Media — Admin Panel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#0a0a0a; --card:#151515; --line:rgba(224,57,138,.2);
+      --grad:linear-gradient(135deg,#6C2BD9,#E0398A 55%,#F2933D);
+      --magenta:#E0398A; --text:#f2f2f2; --muted:#a3a3a3; --radius:14px;
+    }
+    *{margin:0;padding:0;box-sizing:border-box}
+    body{background:var(--bg);color:var(--text);font-family:"Inter",sans-serif;line-height:1.5}
+    .wrap{max-width:960px;margin:0 auto;padding:40px 20px}
+    h1{font-size:24px;margin-bottom:4px}
+    h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .sub{color:var(--muted);font-size:14px;margin-bottom:30px}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin-bottom:24px}
+    label{display:block;font-size:13px;color:var(--muted);margin:12px 0 6px}
+    input[type=email],input[type=password],input[type=text],input[type=file]{
+      width:100%;background:#0e0e0e;border:1px solid var(--line);border-radius:10px;
+      padding:12px 14px;color:var(--text);font-family:inherit;font-size:14px}
+    input:focus{outline:none;border-color:var(--magenta)}
+    .btn{background:var(--grad);color:#fff;border:none;border-radius:40px;padding:12px 26px;
+      font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:transform .2s}
+    .btn:hover{transform:translateY(-2px)}
+    .btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
+    .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
+    .btn-danger{background:#3a1414;border:1px solid #7a2b2b;color:#ff9b9b;padding:7px 14px;font-size:13px;border-radius:8px}
+    .row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+    .status{font-size:14px;margin-top:14px;min-height:18px}
+    .status.ok{color:#4ade80}.status.err{color:#f87171}
+    .hidden{display:none}
+    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin-top:20px}
+    .tile{background:#0e0e0e;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+    .tile .media{aspect-ratio:1;background:#000}
+    .tile img,.tile video{width:100%;height:100%;object-fit:cover;display:block}
+    .tile .meta{padding:10px;display:flex;flex-direction:column;gap:8px}
+    .tile .tt{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .tag{font-size:11px;color:var(--magenta);text-transform:uppercase;letter-spacing:1px}
+    .muted{color:var(--muted);font-size:14px}
+    a.back{color:var(--magenta);font-size:14px;text-decoration:none}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Dominor <span>Admin</span></h1>
+    <p class="sub">Galeri içeriklerini buradan yönetirsin. <a class="back" href="index.html">← Siteye dön</a></p>
+
+    <!-- Uyarı: config yok -->
+    <div class="card hidden" id="noConfig">
+      <strong>Kurulum gerekli.</strong>
+      <p class="muted" style="margin-top:8px">
+        <code>supabase-config.js</code> dosyasındaki <code>SUPABASE_URL</code> ve
+        <code>SUPABASE_ANON_KEY</code> değerlerini doldur, ardından sayfayı yenile.
+        Adımlar için <code>KURULUM.md</code> dosyasına bak.
+      </p>
+    </div>
+
+    <!-- Giriş -->
+    <div class="card hidden" id="loginCard">
+      <h2 style="font-size:18px;margin-bottom:4px">Giriş Yap</h2>
+      <p class="muted">Sadece yetkili kullanıcı içerik ekleyebilir.</p>
+      <form id="loginForm">
+        <label>E-posta</label>
+        <input type="email" id="email" required />
+        <label>Şifre</label>
+        <input type="password" id="password" required />
+        <div style="margin-top:18px"><button class="btn" id="loginBtn" type="submit">Giriş</button></div>
+        <p class="status" id="loginStatus"></p>
+      </form>
+    </div>
+
+    <!-- Panel -->
+    <div id="panel" class="hidden">
+      <div class="card">
+        <div class="row">
+          <div><strong id="userEmail"></strong><div class="muted">Oturum açık</div></div>
+          <button class="btn btn-ghost" id="logoutBtn">Çıkış</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 style="font-size:18px;margin-bottom:4px">Yeni İçerik Ekle</h2>
+        <p class="muted">Fotoğraf veya video yükle. Yüklenince sitedeki galeride görünür.</p>
+        <form id="uploadForm">
+          <label>Başlık (opsiyonel)</label>
+          <input type="text" id="title" placeholder="Örn: Instagram kampanyası" />
+          <label>Dosya (foto / video)</label>
+          <input type="file" id="file" accept="image/*,video/*" required />
+          <div style="margin-top:18px"><button class="btn" id="uploadBtn" type="submit">Yükle</button></div>
+          <p class="status" id="uploadStatus"></p>
+        </form>
+      </div>
+
+      <div class="card">
+        <h2 style="font-size:18px;margin-bottom:4px">Mevcut İçerikler</h2>
+        <p class="muted" id="listInfo">Yükleniyor...</p>
+        <div class="grid" id="itemGrid"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script>
+  (function(){
+    const $ = (id)=>document.getElementById(id);
+    const noConfig=$("noConfig"), loginCard=$("loginCard"), panel=$("panel");
+
+    if(!supabaseClient){ noConfig.classList.remove("hidden"); return; }
+
+    // Oturum durumu
+    async function refresh(){
+      const { data:{ session } } = await supabaseClient.auth.getSession();
+      if(session){
+        loginCard.classList.add("hidden");
+        panel.classList.remove("hidden");
+        $("userEmail").textContent = session.user.email;
+        loadItems();
+      } else {
+        panel.classList.add("hidden");
+        loginCard.classList.remove("hidden");
+      }
+    }
+
+    // Giriş
+    $("loginForm").addEventListener("submit", async (e)=>{
+      e.preventDefault();
+      const btn=$("loginBtn"), st=$("loginStatus");
+      btn.disabled=true; st.textContent=""; st.className="status";
+      const { error } = await supabaseClient.auth.signInWithPassword({
+        email:$("email").value.trim(), password:$("password").value
+      });
+      btn.disabled=false;
+      if(error){ st.textContent="Giriş başarısız: "+error.message; st.classList.add("err"); }
+      else refresh();
+    });
+
+    // Çıkış
+    $("logoutBtn").addEventListener("click", async ()=>{
+      await supabaseClient.auth.signOut(); refresh();
+    });
+
+    // Yükleme
+    $("uploadForm").addEventListener("submit", async (e)=>{
+      e.preventDefault();
+      const btn=$("uploadBtn"), st=$("uploadStatus"), fileEl=$("file");
+      const file=fileEl.files[0];
+      if(!file) return;
+      btn.disabled=true; btn.textContent="Yükleniyor..."; st.textContent=""; st.className="status";
+
+      try{
+        const type = file.type.startsWith("video") ? "video" : "image";
+        const safe = file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
+        const path = `uploads/${Date.now()}-${safe}`;
+
+        const { error:upErr } = await supabaseClient.storage
+          .from(GALLERY_BUCKET).upload(path, file, { cacheControl:"3600", upsert:false });
+        if(upErr) throw upErr;
+
+        const { data:{ publicUrl } } = supabaseClient.storage.from(GALLERY_BUCKET).getPublicUrl(path);
+
+        const { error:insErr } = await supabaseClient.from("gallery_items")
+          .insert({ type, url:publicUrl, path, title:$("title").value.trim() || null });
+        if(insErr) throw insErr;
+
+        st.textContent="✓ Yüklendi."; st.classList.add("ok");
+        $("uploadForm").reset();
+        loadItems();
+      }catch(err){
+        st.textContent="Hata: "+(err.message||err); st.classList.add("err");
+      }finally{
+        btn.disabled=false; btn.textContent="Yükle";
+      }
+    });
+
+    // Listele
+    async function loadItems(){
+      const info=$("listInfo"), grid=$("itemGrid");
+      const { data, error } = await supabaseClient.from("gallery_items")
+        .select("*").order("created_at",{ascending:false});
+      if(error){ info.textContent="Yüklenemedi."; return; }
+      if(!data.length){ info.textContent="Henüz içerik yok."; grid.innerHTML=""; return; }
+      info.textContent = data.length+" içerik";
+      grid.innerHTML = data.map(it=>`
+        <div class="tile">
+          <div class="media">${
+            it.type==="video"
+              ? `<video src="${it.url}" muted></video>`
+              : `<img src="${it.url}" alt="">`
+          }</div>
+          <div class="meta">
+            <span class="tag">${it.type==="video"?"Video":"Foto"}</span>
+            <span class="tt">${it.title?it.title.replace(/</g,"&lt;"):"—"}</span>
+            <button class="btn-danger" data-id="${it.id}" data-path="${it.path||""}">Sil</button>
+          </div>
+        </div>`).join("");
+      grid.querySelectorAll(".btn-danger").forEach(b=>{
+        b.addEventListener("click", ()=>del(b.dataset.id, b.dataset.path, b));
+      });
+    }
+
+    // Sil
+    async function del(id, path, btn){
+      if(!confirm("Bu içerik silinsin mi?")) return;
+      btn.disabled=true; btn.textContent="Siliniyor...";
+      try{
+        if(path){ await supabaseClient.storage.from(GALLERY_BUCKET).remove([path]); }
+        const { error } = await supabaseClient.from("gallery_items").delete().eq("id", id);
+        if(error) throw error;
+        loadItems();
+      }catch(err){
+        alert("Silinemedi: "+(err.message||err));
+        btn.disabled=false; btn.textContent="Sil";
+      }
+    }
+
+    supabaseClient.auth.onAuthStateChange(()=>refresh());
+    refresh();
+  })();
+  </script>
+</body>
+</html>

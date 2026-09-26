@@ -1,0 +1,29 @@
+Fotoğraflarını bu klasöre at.
+
+Sitede beklenen dosya adları:
+  about.jpg      -> Hakkımızda görseli
+  work-1.jpg     -> Portfolyo 1
+  work-2.jpg     -> Portfolyo 2
+  work-3.jpg     -> Portfolyo 3
+  work-4.jpg     -> Portfolyo 4
+  work-5.jpg     -> Portfolyo 5
+  work-6.jpg     -> Portfolyo 6
+  team-1.jpg     -> Ekip: Cesur Kaya
+  team-2.jpg     -> Ekip: Kuzey Kakaş
+  team-3.jpg     -> Ekip: Loran Gavloski
+  team-4.jpg     -> Ekip: Baki Çağlar
+  brand-1.jpg    -> Referans: Coffee Limee
+  brand-2.jpg    -> Referans: Unique Team
+  brand-3.jpg    -> Referans: Take Off
+  brand-4.jpg    -> Referans: Uçmakdere Dağ Evi
+  brand-5.jpg    -> Referans: BigChefs
+  brand-6.jpg    -> Referans: Bungalovcum
+  brand-7.jpg    -> Referans: Arçelik
+  brand-8.jpg    -> Referans: Mado
+  logo.png       -> (opsiyonel) logo
+  og-image.jpg   -> (opsiyonel) sosyal paylaşım önizlemesi
+
+Fotoğrafı sitede göstermek için index.html'de ilgili yerdeki
+  <div class="img-placeholder"><span>...</span></div>
+satırını şununla değiştir:
+  <img src="images/work-1.jpg" alt="Proje 1" class="img-real" />
