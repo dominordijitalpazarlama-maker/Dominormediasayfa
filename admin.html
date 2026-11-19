@@ -3,56 +3,149 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="noindex" />
-  <title>Dominor Media — Admin Panel</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <meta name="robots" content="noindex, nofollow" />
+  <meta name="theme-color" content="#07070a" />
+  <title>Dominor Media — Yönetim Paneli</title>
+  <link rel="icon" href="images/logo-icon.png" type="image/png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&display=swap" rel="stylesheet" />
   <style>
-    :root{
-      --bg:#0a0a0a; --card:#151515; --line:rgba(224,57,138,.2);
-      --grad:linear-gradient(135deg,#6C2BD9,#E0398A 55%,#F2933D);
-      --magenta:#E0398A; --text:#f2f2f2; --muted:#a3a3a3; --radius:14px;
+    :root {
+      color-scheme: dark;
+      --bg: #07070a; --line: rgba(255,255,255,.09); --line-2: rgba(255,255,255,.16);
+      --text: #f5f4f8; --muted: #a19eae; --faint: #6f6c7b;
+      --grad: linear-gradient(115deg, #8b5cf6 0%, #e0398a 55%, #f2933d 100%);
+      --ease: cubic-bezier(.22, 1, .36, 1);
+      --danger: #ff8f8f; --ok: #7ee0a3;
     }
-    *{margin:0;padding:0;box-sizing:border-box}
-    body{background:var(--bg);color:var(--text);font-family:"Inter",sans-serif;line-height:1.5}
-    .wrap{max-width:960px;margin:0 auto;padding:40px 20px}
-    h1{font-size:24px;margin-bottom:4px}
-    h1 span{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
-    .sub{color:var(--muted);font-size:14px;margin-bottom:30px}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:24px;margin-bottom:24px}
-    label{display:block;font-size:13px;color:var(--muted);margin:12px 0 6px}
-    input[type=email],input[type=password],input[type=text],input[type=file]{
-      width:100%;background:#0e0e0e;border:1px solid var(--line);border-radius:10px;
-      padding:12px 14px;color:var(--text);font-family:inherit;font-size:14px}
-    input:focus{outline:none;border-color:var(--magenta)}
-    .btn{background:var(--grad);color:#fff;border:none;border-radius:40px;padding:12px 26px;
-      font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;transition:transform .2s}
-    .btn:hover{transform:translateY(-2px)}
-    .btn:disabled{opacity:.6;cursor:not-allowed;transform:none}
-    .btn-ghost{background:transparent;border:1px solid var(--line);color:var(--text)}
-    .btn-danger{background:#3a1414;border:1px solid #7a2b2b;color:#ff9b9b;padding:7px 14px;font-size:13px;border-radius:8px}
-    .row{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-    .status{font-size:14px;margin-top:14px;min-height:18px}
-    .status.ok{color:#4ade80}.status.err{color:#f87171}
-    .hidden{display:none}
-    .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;margin-top:20px}
-    .tile{background:#0e0e0e;border:1px solid var(--line);border-radius:12px;overflow:hidden}
-    .tile .media{aspect-ratio:1;background:#000}
-    .tile img,.tile video{width:100%;height:100%;object-fit:cover;display:block}
-    .tile .meta{padding:10px;display:flex;flex-direction:column;gap:8px}
-    .tile .tt{font-size:13px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-    .tag{font-size:11px;color:var(--magenta);text-transform:uppercase;letter-spacing:1px}
-    .muted{color:var(--muted);font-size:14px}
-    a.back{color:var(--magenta);font-size:14px;text-decoration:none}
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { background: var(--bg); scrollbar-width: thin; scrollbar-color: #2b2a35 transparent; }
+    body {
+      min-height: 100vh; color: var(--text); font-family: "Manrope", system-ui, sans-serif;
+      line-height: 1.6; -webkit-font-smoothing: antialiased;
+    }
+    body::before {
+      content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+      background:
+        radial-gradient(700px circle at 8% -8%, rgba(108,43,217,.38), transparent 60%),
+        radial-gradient(640px circle at 96% 4%, rgba(224,57,138,.22), transparent 60%);
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; background: none; border: 0; cursor: pointer; }
+    [hidden] { display: none !important; }
+    :focus-visible { outline: 2px solid #e0398a; outline-offset: 3px; }
+
+    .wrap { width: min(100%, 980px); margin: 0 auto; padding: 36px 20px 80px; }
+
+    .top { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 44px; }
+    .brand { display: inline-flex; align-items: center; gap: 12px; }
+    .brand img { height: 32px; width: auto; }
+    .brand b { display: block; font-size: 14px; font-weight: 800; letter-spacing: .22em; line-height: 1; }
+    .brand i { display: block; margin-top: 4px; font-style: normal; font-size: 9.5px; font-weight: 600; letter-spacing: .6em; color: var(--muted); line-height: 1; }
+    .back {
+      display: inline-flex; align-items: center; gap: 8px; padding: 10px 18px; border-radius: 999px; font-size: 14px; font-weight: 600;
+      color: var(--muted); border: 1px solid var(--line); transition: color .5s var(--ease), border-color .5s var(--ease), background .5s var(--ease);
+    }
+    .back:hover { color: var(--text); border-color: var(--line-2); background: rgba(255,255,255,.05); }
+    .back svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    h1 { font-size: clamp(30px, 5vw, 44px); font-weight: 700; letter-spacing: -.04em; line-height: 1.1; }
+    h1 span { background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; }
+    .sub { margin: 10px 0 36px; color: var(--muted); }
+
+    .card {
+      margin-bottom: 20px; padding: clamp(22px, 3vw, 32px); border-radius: 26px;
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.03));
+      border: 1px solid var(--line);
+      -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+      animation: rise .9s var(--ease) both;
+    }
+    .card h2 { font-size: 20px; font-weight: 700; letter-spacing: -.03em; margin-bottom: 4px; }
+    .muted { color: var(--muted); font-size: 14.5px; }
+    @keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+    label.lbl { display: block; margin: 18px 0 8px; font-size: 13px; font-weight: 600; color: var(--muted); }
+    input[type=email], input[type=password], input[type=text] {
+      width: 100%; padding: 14px 16px; border-radius: 14px; font: inherit; font-size: 15px; color: var(--text);
+      background: rgba(255,255,255,.035); border: 1px solid var(--line);
+      transition: border-color .5s var(--ease), box-shadow .5s var(--ease), background .5s var(--ease);
+    }
+    input:hover { border-color: var(--line-2); }
+    input:focus { outline: none; border-color: rgba(224,57,138,.65); background: rgba(255,255,255,.055); box-shadow: 0 0 0 4px rgba(224,57,138,.12); }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 14px 28px; border-radius: 999px;
+      font-size: 15px; font-weight: 600; color: #fff; background-image: var(--grad); background-size: 160% 100%;
+      box-shadow: 0 10px 36px -12px rgba(224,57,138,.6), inset 0 1px 0 rgba(255,255,255,.25);
+      transition: background-position .8s var(--ease), box-shadow .8s var(--ease), transform .7s var(--ease), opacity .4s;
+    }
+    .btn:hover { background-position: 100% 0; transform: translateY(-2px); }
+    .btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+    .btn-ghost { background: rgba(255,255,255,.04); background-image: none; border: 1px solid var(--line-2); box-shadow: none; }
+    .btn-ghost:hover { background: rgba(255,255,255,.09); }
+
+    .row { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    .who { display: flex; align-items: center; gap: 14px; }
+    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--ok); box-shadow: 0 0 0 4px rgba(126,224,163,.15); }
+    .who strong { display: block; font-size: 15px; }
+
+    .status { min-height: 22px; margin-top: 14px; font-size: 14px; }
+    .status.ok { color: var(--ok); } .status.err { color: var(--danger); }
+
+    /* Dosya alanı */
+    .drop {
+      position: relative; display: grid; justify-items: center; gap: 6px; padding: 34px 20px; margin-top: 8px; text-align: center;
+      border: 1.5px dashed var(--line-2); border-radius: 20px; background: rgba(255,255,255,.02); cursor: pointer;
+      transition: border-color .6s var(--ease), background .6s var(--ease);
+    }
+    .drop:hover, .drop.over { border-color: rgba(224,57,138,.7); background: rgba(224,57,138,.07); }
+    .drop input { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .drop svg { width: 30px; height: 30px; fill: none; stroke: currentColor; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; color: var(--muted); }
+    .drop b { font-size: 15px; }
+    .drop small { color: var(--faint); font-size: 13px; }
+    .drop.has b { color: var(--ok); }
+
+    /* İçerik ızgarası */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 14px; margin-top: 22px; }
+    .tile {
+      overflow: hidden; border-radius: 18px; border: 1px solid var(--line); background: rgba(0,0,0,.25);
+      animation: rise .8s var(--ease) both; animation-delay: calc(var(--i, 0) * 50ms);
+    }
+    .tile .media { aspect-ratio: 1; background: #000; }
+    .tile img, .tile video { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .tile .meta { display: grid; gap: 8px; padding: 12px; }
+    .tag { font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; background: var(--grad); -webkit-background-clip: text; background-clip: text; color: transparent; width: fit-content; }
+    .tt { font-size: 13px; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .del {
+      padding: 9px 12px; border-radius: 12px; font-size: 13px; font-weight: 600; color: var(--muted);
+      border: 1px solid var(--line); transition: all .5s var(--ease);
+    }
+    .del:hover { color: var(--danger); border-color: rgba(255,143,143,.4); }
+    .del.armed { color: #fff; background: rgba(255,90,90,.18); border-color: rgba(255,120,120,.6); }
+
+    code { padding: 2px 8px; border-radius: 8px; background: rgba(255,255,255,.07); font-size: 13px; }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <h1>Dominor <span>Admin</span></h1>
-    <p class="sub">Galeri içeriklerini buradan yönetirsin. <a class="back" href="index.html">← Siteye dön</a></p>
+    <div class="top">
+      <a href="index.html" class="brand" aria-label="Dominor Media">
+        <img src="images/logo-icon.png" alt="" width="38" height="32" />
+        <span><b>DOMINOR</b><i>MEDIA</i></span>
+      </a>
+      <a href="index.html" class="back">
+        <svg viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></svg>
+        Siteye dön
+      </a>
+    </div>
+
+    <h1>Yönetim <span>paneli</span></h1>
+    <p class="sub">Sitedeki galeri içeriklerini buradan yönetirsin.</p>
 
     <!-- Uyarı: config yok -->
-    <div class="card hidden" id="noConfig">
-      <strong>Kurulum gerekli.</strong>
+    <div class="card" id="noConfig" hidden>
+      <h2>Kurulum gerekli</h2>
       <p class="muted" style="margin-top:8px">
         <code>supabase-config.js</code> dosyasındaki <code>SUPABASE_URL</code> ve
         <code>SUPABASE_ANON_KEY</code> değerlerini doldur, ardından sayfayı yenile.
@@ -61,43 +154,50 @@
     </div>
 
     <!-- Giriş -->
-    <div class="card hidden" id="loginCard">
-      <h2 style="font-size:18px;margin-bottom:4px">Giriş Yap</h2>
-      <p class="muted">Sadece yetkili kullanıcı içerik ekleyebilir.</p>
+    <div class="card" id="loginCard" hidden>
+      <h2>Giriş yap</h2>
+      <p class="muted">Yalnızca yetkili kullanıcı içerik ekleyebilir.</p>
       <form id="loginForm">
-        <label>E-posta</label>
-        <input type="email" id="email" required />
-        <label>Şifre</label>
-        <input type="password" id="password" required />
-        <div style="margin-top:18px"><button class="btn" id="loginBtn" type="submit">Giriş</button></div>
-        <p class="status" id="loginStatus"></p>
+        <label class="lbl" for="email">E-posta</label>
+        <input type="email" id="email" autocomplete="username" required />
+        <label class="lbl" for="password">Şifre</label>
+        <input type="password" id="password" autocomplete="current-password" required />
+        <div style="margin-top:22px"><button class="btn" id="loginBtn" type="submit">Giriş yap</button></div>
+        <p class="status" id="loginStatus" role="status" aria-live="polite"></p>
       </form>
     </div>
 
     <!-- Panel -->
-    <div id="panel" class="hidden">
+    <div id="panel" hidden>
       <div class="card">
         <div class="row">
-          <div><strong id="userEmail"></strong><div class="muted">Oturum açık</div></div>
-          <button class="btn btn-ghost" id="logoutBtn">Çıkış</button>
+          <div class="who"><span class="dot"></span><div><strong id="userEmail"></strong><span class="muted">Oturum açık</span></div></div>
+          <button class="btn btn-ghost" id="logoutBtn" type="button">Çıkış yap</button>
         </div>
       </div>
 
       <div class="card">
-        <h2 style="font-size:18px;margin-bottom:4px">Yeni İçerik Ekle</h2>
+        <h2>Yeni içerik ekle</h2>
         <p class="muted">Fotoğraf veya video yükle. Yüklenince sitedeki galeride görünür.</p>
         <form id="uploadForm">
-          <label>Başlık (opsiyonel)</label>
+          <label class="lbl" for="title">Başlık (isteğe bağlı)</label>
           <input type="text" id="title" placeholder="Örn: Instagram kampanyası" />
-          <label>Dosya (foto / video)</label>
-          <input type="file" id="file" accept="image/*,video/*" required />
-          <div style="margin-top:18px"><button class="btn" id="uploadBtn" type="submit">Yükle</button></div>
-          <p class="status" id="uploadStatus"></p>
+
+          <label class="lbl" for="file">Dosya</label>
+          <div class="drop" id="drop">
+            <input type="file" id="file" accept="image/*,video/*" required />
+            <svg viewBox="0 0 24 24"><path d="M12 16V5M7.5 9.5 12 5l4.5 4.5"/><path d="M4 16v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+            <b id="dropTitle">Dosyayı seç ya da buraya bırak</b>
+            <small id="dropSub">Fotoğraf veya video</small>
+          </div>
+
+          <div style="margin-top:22px"><button class="btn" id="uploadBtn" type="submit">Yükle</button></div>
+          <p class="status" id="uploadStatus" role="status" aria-live="polite"></p>
         </form>
       </div>
 
       <div class="card">
-        <h2 style="font-size:18px;margin-bottom:4px">Mevcut İçerikler</h2>
+        <h2>Mevcut içerikler</h2>
         <p class="muted" id="listInfo">Yükleniyor...</p>
         <div class="grid" id="itemGrid"></div>
       </div>
@@ -107,119 +207,148 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="supabase-config.js"></script>
   <script>
-  (function(){
-    const $ = (id)=>document.getElementById(id);
-    const noConfig=$("noConfig"), loginCard=$("loginCard"), panel=$("panel");
+  (function () {
+    const $ = (id) => document.getElementById(id);
+    const noConfig = $("noConfig"), loginCard = $("loginCard"), panel = $("panel");
 
-    if(!supabaseClient){ noConfig.classList.remove("hidden"); return; }
+    if (!supabaseClient) { noConfig.hidden = false; return; }
 
     // Oturum durumu
-    async function refresh(){
-      const { data:{ session } } = await supabaseClient.auth.getSession();
-      if(session){
-        loginCard.classList.add("hidden");
-        panel.classList.remove("hidden");
+    async function refresh() {
+      const { data: { session } } = await supabaseClient.auth.getSession();
+      if (session) {
+        loginCard.hidden = true;
+        panel.hidden = false;
         $("userEmail").textContent = session.user.email;
         loadItems();
       } else {
-        panel.classList.add("hidden");
-        loginCard.classList.remove("hidden");
+        panel.hidden = true;
+        loginCard.hidden = false;
       }
     }
 
     // Giriş
-    $("loginForm").addEventListener("submit", async (e)=>{
+    $("loginForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const btn=$("loginBtn"), st=$("loginStatus");
-      btn.disabled=true; st.textContent=""; st.className="status";
+      const btn = $("loginBtn"), st = $("loginStatus");
+      btn.disabled = true; st.textContent = ""; st.className = "status";
       const { error } = await supabaseClient.auth.signInWithPassword({
-        email:$("email").value.trim(), password:$("password").value
+        email: $("email").value.trim(), password: $("password").value,
       });
-      btn.disabled=false;
-      if(error){ st.textContent="Giriş başarısız: "+error.message; st.classList.add("err"); }
+      btn.disabled = false;
+      if (error) { st.textContent = "Giriş başarısız: " + error.message; st.classList.add("err"); }
       else refresh();
     });
 
     // Çıkış
-    $("logoutBtn").addEventListener("click", async ()=>{
-      await supabaseClient.auth.signOut(); refresh();
+    $("logoutBtn").addEventListener("click", async () => { await supabaseClient.auth.signOut(); refresh(); });
+
+    // Dosya alanı: seçilen dosyayı göster, sürükle-bırak
+    const drop = $("drop"), fileEl = $("file");
+    function showFile() {
+      const f = fileEl.files[0];
+      drop.classList.toggle("has", !!f);
+      $("dropTitle").textContent = f ? f.name : "Dosyayı seç ya da buraya bırak";
+      $("dropSub").textContent = f ? (f.size / 1048576).toFixed(1) + " MB" : "Fotoğraf veya video";
+    }
+    fileEl.addEventListener("change", showFile);
+    ["dragenter", "dragover"].forEach((ev) => drop.addEventListener(ev, (e) => { e.preventDefault(); drop.classList.add("over"); }));
+    ["dragleave", "drop"].forEach((ev) => drop.addEventListener(ev, () => drop.classList.remove("over")));
+    drop.addEventListener("drop", (e) => {
+      e.preventDefault();
+      if (e.dataTransfer.files.length) { fileEl.files = e.dataTransfer.files; showFile(); }
     });
 
     // Yükleme
-    $("uploadForm").addEventListener("submit", async (e)=>{
+    $("uploadForm").addEventListener("submit", async (e) => {
       e.preventDefault();
-      const btn=$("uploadBtn"), st=$("uploadStatus"), fileEl=$("file");
-      const file=fileEl.files[0];
-      if(!file) return;
-      btn.disabled=true; btn.textContent="Yükleniyor..."; st.textContent=""; st.className="status";
+      const btn = $("uploadBtn"), st = $("uploadStatus");
+      const file = fileEl.files[0];
+      if (!file) return;
+      btn.disabled = true; btn.textContent = "Yükleniyor..."; st.textContent = ""; st.className = "status";
 
-      try{
+      try {
         const type = file.type.startsWith("video") ? "video" : "image";
-        const safe = file.name.replace(/[^a-zA-Z0-9._-]/g,"_");
-        const path = `uploads/${Date.now()}-${safe}`;
+        const safe = file.name.replace(/[^a-zA-Z0-9._-]/g, "_");
+        const path = "uploads/" + Date.now() + "-" + safe;
 
-        const { error:upErr } = await supabaseClient.storage
-          .from(GALLERY_BUCKET).upload(path, file, { cacheControl:"3600", upsert:false });
-        if(upErr) throw upErr;
+        const { error: upErr } = await supabaseClient.storage
+          .from(GALLERY_BUCKET).upload(path, file, { cacheControl: "3600", upsert: false });
+        if (upErr) throw upErr;
 
-        const { data:{ publicUrl } } = supabaseClient.storage.from(GALLERY_BUCKET).getPublicUrl(path);
+        const { data: { publicUrl } } = supabaseClient.storage.from(GALLERY_BUCKET).getPublicUrl(path);
 
-        const { error:insErr } = await supabaseClient.from("gallery_items")
-          .insert({ type, url:publicUrl, path, title:$("title").value.trim() || null });
-        if(insErr) throw insErr;
+        const { error: insErr } = await supabaseClient.from("gallery_items")
+          .insert({ type, url: publicUrl, path, title: $("title").value.trim() || null });
+        if (insErr) throw insErr;
 
-        st.textContent="✓ Yüklendi."; st.classList.add("ok");
-        $("uploadForm").reset();
+        st.textContent = "Yüklendi. Galeride görünüyor."; st.classList.add("ok");
+        $("uploadForm").reset(); showFile();
         loadItems();
-      }catch(err){
-        st.textContent="Hata: "+(err.message||err); st.classList.add("err");
-      }finally{
-        btn.disabled=false; btn.textContent="Yükle";
+      } catch (err) {
+        st.textContent = "Hata: " + (err.message || err); st.classList.add("err");
+      } finally {
+        btn.disabled = false; btn.textContent = "Yükle";
       }
     });
 
     // Listele
-    async function loadItems(){
-      const info=$("listInfo"), grid=$("itemGrid");
+    async function loadItems() {
+      const info = $("listInfo"), grid = $("itemGrid");
       const { data, error } = await supabaseClient.from("gallery_items")
-        .select("*").order("created_at",{ascending:false});
-      if(error){ info.textContent="Yüklenemedi."; return; }
-      if(!data.length){ info.textContent="Henüz içerik yok."; grid.innerHTML=""; return; }
-      info.textContent = data.length+" içerik";
-      grid.innerHTML = data.map(it=>`
-        <div class="tile">
-          <div class="media">${
-            it.type==="video"
-              ? `<video src="${it.url}" muted></video>`
-              : `<img src="${it.url}" alt="">`
-          }</div>
-          <div class="meta">
-            <span class="tag">${it.type==="video"?"Video":"Foto"}</span>
-            <span class="tt">${it.title?it.title.replace(/</g,"&lt;"):"—"}</span>
-            <button class="btn-danger" data-id="${it.id}" data-path="${it.path||""}">Sil</button>
-          </div>
-        </div>`).join("");
-      grid.querySelectorAll(".btn-danger").forEach(b=>{
-        b.addEventListener("click", ()=>del(b.dataset.id, b.dataset.path, b));
+        .select("*").order("created_at", { ascending: false });
+      if (error) { info.textContent = "İçerikler yüklenemedi."; return; }
+      grid.replaceChildren();
+      if (!data.length) { info.textContent = "Henüz içerik yok."; return; }
+      info.textContent = data.length + " içerik";
+
+      data.forEach((it, i) => {
+        const tile = document.createElement("div");
+        tile.className = "tile"; tile.style.setProperty("--i", Math.min(i, 12));
+
+        const media = document.createElement("div"); media.className = "media";
+        if (it.type === "video") {
+          const v = document.createElement("video"); v.src = it.url; v.muted = true; v.preload = "metadata"; media.append(v);
+        } else {
+          const im = document.createElement("img"); im.src = it.url; im.alt = ""; im.loading = "lazy"; media.append(im);
+        }
+
+        const meta = document.createElement("div"); meta.className = "meta";
+        const tag = document.createElement("span"); tag.className = "tag"; tag.textContent = it.type === "video" ? "Video" : "Foto";
+        const tt = document.createElement("span"); tt.className = "tt"; tt.textContent = it.title || "Başlıksız";
+        const del = document.createElement("button"); del.type = "button"; del.className = "del"; del.textContent = "Sil";
+        del.addEventListener("click", () => confirmDelete(del, it.id, it.path));
+        meta.append(tag, tt, del);
+
+        tile.append(media, meta);
+        grid.append(tile);
       });
     }
 
-    // Sil
-    async function del(id, path, btn){
-      if(!confirm("Bu içerik silinsin mi?")) return;
-      btn.disabled=true; btn.textContent="Siliniyor...";
-      try{
-        if(path){ await supabaseClient.storage.from(GALLERY_BUCKET).remove([path]); }
+    // Silme: ilk dokunuş uyarır, 4 saniye içinde ikinci dokunuş siler
+    function confirmDelete(btn, id, path) {
+      if (!btn.classList.contains("armed")) {
+        btn.classList.add("armed"); btn.textContent = "Silmek için tekrar dokun";
+        setTimeout(() => { btn.classList.remove("armed"); btn.textContent = "Sil"; }, 4000);
+        return;
+      }
+      del(id, path, btn);
+    }
+
+    async function del(id, path, btn) {
+      btn.disabled = true; btn.textContent = "Siliniyor...";
+      try {
+        if (path) await supabaseClient.storage.from(GALLERY_BUCKET).remove([path]);
         const { error } = await supabaseClient.from("gallery_items").delete().eq("id", id);
-        if(error) throw error;
+        if (error) throw error;
         loadItems();
-      }catch(err){
-        alert("Silinemedi: "+(err.message||err));
-        btn.disabled=false; btn.textContent="Sil";
+      } catch (err) {
+        btn.disabled = false; btn.classList.remove("armed"); btn.textContent = "Sil";
+        $("listInfo").textContent = "Silinemedi: " + (err.message || err);
       }
     }
 
-    supabaseClient.auth.onAuthStateChange(()=>refresh());
+    supabaseClient.auth.onAuthStateChange(() => refresh());
     refresh();
   })();
   </script>

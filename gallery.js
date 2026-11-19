@@ -1,109 +1,147 @@
 /* =========================================================
-   GALERİ — Supabase'ten içerikleri çeker, eşit ızgarada gösterir
+   GALERİ — Supabase'ten içerikleri çeker, eşit ızgarada gösterir.
+   Bağlantı kurulamazsa ya da içerik yoksa galeri bölümü (ve menüdeki
+   bağlantısı) hiç görünmez; ziyaretçi boş bir bölüm görmez.
    ========================================================= */
 (function () {
-  const grid = document.getElementById("galleryGrid");
-  const empty = document.getElementById("galleryEmpty");
-  const filterBtns = document.querySelectorAll(".filter-btn");
-  const lightbox = document.getElementById("lightbox");
-  const lightboxContent = document.getElementById("lightboxContent");
-  const lightboxClose = document.getElementById("lightboxClose");
+  "use strict";
 
-  if (!grid) return;
+  var section = document.getElementById("gallery");
+  var grid = document.getElementById("galleryGrid");
+  var filterWrap = document.getElementById("galleryFilter");
+  if (!section || !grid || !filterWrap) return;
 
-  let items = [];
-  let activeFilter = "all";
+  var btns = Array.prototype.slice.call(filterWrap.querySelectorAll(".seg-btn"));
+  var glider = filterWrap.querySelector(".seg-glider");
+  var SVG_NS = "http://www.w3.org/2000/svg";
 
-  async function loadGallery() {
-    if (!supabaseClient) {
-      empty.textContent = "Galeri için Supabase bağlantısı gerekli (supabase-config.js dosyasını doldur).";
-      return;
-    }
-    const { data, error } = await supabaseClient
-      .from("gallery_items")
-      .select("*")
-      .order("created_at", { ascending: false });
+  var items = [];
+  var activeFilter = "all";
 
-    if (error) {
-      empty.textContent = "İçerikler yüklenemedi.";
-      return;
-    }
-    items = data || [];
-    render();
+  function safeUrl(u) {
+    try {
+      var p = new URL(u, location.href).protocol;
+      return p === "https:" || p === "http:";
+    } catch (e) { return false; }
+  }
+
+  function placeGlider(animate) {
+    var active = btns.filter(function (b) { return b.classList.contains("active"); })[0];
+    if (!active || !glider) return;
+    var c = filterWrap.getBoundingClientRect();
+    var r = active.getBoundingClientRect();
+    if (!animate) glider.classList.add("no-anim");
+    glider.style.width = r.width + "px";
+    glider.style.height = r.height + "px";
+    glider.style.transform = "translate(" + (r.left - c.left) + "px," + (r.top - c.top) + "px)";
+    if (!animate) { void glider.offsetWidth; glider.classList.remove("no-anim"); }
+  }
+
+  function icon(id) {
+    var svg = document.createElementNS(SVG_NS, "svg");
+    svg.setAttribute("class", "i");
+    var use = document.createElementNS(SVG_NS, "use");
+    use.setAttribute("href", "#" + id);
+    svg.appendChild(use);
+    return svg;
   }
 
   function render() {
-    const filtered =
-      activeFilter === "all" ? items : items.filter((i) => i.type === activeFilter);
+    var list = activeFilter === "all" ? items : items.filter(function (i) { return i.type === activeFilter; });
+    grid.replaceChildren();
 
-    if (!filtered.length) {
-      grid.innerHTML = '<p class="gallery-empty">Bu kategoride henüz içerik yok.</p>';
+    if (!list.length) {
+      var p = document.createElement("p");
+      p.className = "gallery-empty";
+      p.textContent = "Bu kategoride henüz içerik yok.";
+      grid.appendChild(p);
       return;
     }
 
-    grid.innerHTML = filtered
-      .map((item, idx) => {
-        const caption = item.title
-          ? `<div class="item-caption">${escapeHtml(item.title)}</div>`
-          : "";
-        if (item.type === "video") {
-          return `
-            <figure class="gallery-item" data-index="${idx}" data-type="video" data-url="${item.url}">
-              <video src="${item.url}" muted playsinline preload="metadata"></video>
-              <span class="play-badge">▶</span>
-              ${caption}
-            </figure>`;
-        }
-        return `
-          <figure class="gallery-item" data-index="${idx}" data-type="image" data-url="${item.url}">
-            <img src="${item.url}" alt="${escapeHtml(item.title || "Galeri görseli")}" loading="lazy" />
-            ${caption}
-          </figure>`;
-      })
-      .join("");
+    var lbItems = list.map(function (it) {
+      return { type: it.type === "video" ? "video" : "image", src: it.url, caption: it.title || "" };
+    });
 
-    grid.querySelectorAll(".gallery-item").forEach((el) => {
-      el.addEventListener("click", () => openLightbox(el.dataset.type, el.dataset.url));
+    list.forEach(function (it, i) {
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "g-item";
+      b.style.setProperty("--gi", Math.min(i, 12));
+      b.setAttribute("aria-label", it.title || (it.type === "video" ? "Videoyu aç" : "Görseli büyüt"));
+
+      if (it.type === "video") {
+        var v = document.createElement("video");
+        v.src = it.url + "#t=0.1";
+        v.muted = true;
+        v.playsInline = true;
+        v.preload = "metadata";
+        b.appendChild(v);
+        var badge = document.createElement("span");
+        badge.className = "g-play";
+        badge.appendChild(icon("i-play"));
+        b.appendChild(badge);
+      } else {
+        var img = new Image();
+        img.src = it.url;
+        img.alt = it.title || "Galeri görseli";
+        img.loading = "lazy";
+        img.decoding = "async";
+        b.appendChild(img);
+      }
+
+      if (it.title) {
+        var cap = document.createElement("span");
+        cap.className = "g-cap";
+        cap.textContent = it.title;
+        b.appendChild(cap);
+      }
+
+      b.addEventListener("click", function () {
+        if (window.DominorLightbox) window.DominorLightbox.open(lbItems, i, b);
+      });
+      grid.appendChild(b);
     });
   }
 
-  // --- Filtreler ---
-  filterBtns.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      filterBtns.forEach((b) => b.classList.remove("active"));
-      btn.classList.add("active");
+  function reveal() {
+    section.hidden = false;
+    Array.prototype.forEach.call(document.querySelectorAll("[data-gallery-link]"), function (a) { a.hidden = false; });
+    window.dispatchEvent(new Event("dm:layout"));
+    requestAnimationFrame(function () { placeGlider(false); });
+  }
+
+  btns.forEach(function (btn) {
+    btn.addEventListener("click", function () {
+      btns.forEach(function (b) {
+        var on = b === btn;
+        b.classList.toggle("active", on);
+        b.setAttribute("aria-selected", on ? "true" : "false");
+      });
       activeFilter = btn.dataset.filter;
+      placeGlider(true);
       render();
     });
   });
+  window.addEventListener("resize", function () { if (!section.hidden) placeGlider(false); });
 
-  // --- Lightbox ---
-  function openLightbox(type, url) {
-    lightboxContent.innerHTML =
-      type === "video"
-        ? `<video src="${url}" controls autoplay playsinline></video>`
-        : `<img src="${url}" alt="" />`;
-    lightbox.classList.add("open");
-    document.body.style.overflow = "hidden";
-  }
-  function closeLightbox() {
-    lightbox.classList.remove("open");
-    lightboxContent.innerHTML = "";
-    document.body.style.overflow = "";
-  }
-  lightboxClose.addEventListener("click", closeLightbox);
-  lightbox.addEventListener("click", (e) => {
-    if (e.target === lightbox) closeLightbox();
-  });
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") closeLightbox();
-  });
-
-  function escapeHtml(s) {
-    return String(s)
-      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;");
+  async function load() {
+    if (typeof supabaseClient === "undefined" || !supabaseClient) return;
+    try {
+      var res = await supabaseClient
+        .from("gallery_items")
+        .select("*")
+        .order("created_at", { ascending: false });
+      if (res.error || !res.data || !res.data.length) return;
+      items = res.data.filter(function (i) {
+        return i && typeof i.url === "string" && safeUrl(i.url) && (i.type === "image" || i.type === "video");
+      });
+      if (!items.length) return;
+      reveal();
+      render();
+    } catch (e) {
+      /* bağlantı yoksa galeri gizli kalır */
+    }
   }
 
-  loadGallery();
+  load();
 })();

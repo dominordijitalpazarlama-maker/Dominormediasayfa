@@ -2,346 +2,643 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <script>
+    document.documentElement.classList.add("js");
+    try { if (sessionStorage.getItem("dm-intro")) document.documentElement.classList.add("skip-intro"); } catch (e) {}
+  </script>
 
- 
-  <title>Dominor Media — Sosyal Medya & Dijital Pazarlama Ajansı</title>
+  <!-- ======================================================= -->
+  <!--  SEO / SAYFA BİLGİLERİ — buradaki metinleri düzenle     -->
+  <!-- ======================================================= -->
+  <title>Dominor Media — Sosyal Medya &amp; Dijital Pazarlama Ajansı</title>
   <meta name="description" content="Dominor Media; markalar için sosyal medya yönetimi, içerik üretimi, reklam yönetimi ve e-ticaret çözümleri sunan dijital medya ajansı." />
-  <meta name="keywords" content="sosyal medya yönetimi, dijital pazarlama, içerik üretimi, reklam yönetimi, e-ticaret, marka" />
+  <meta name="keywords" content="sosyal medya yönetimi, dijital pazarlama, içerik üretimi, reklam yönetimi, e-ticaret, marka kimliği" />
   <meta name="author" content="Dominor Media" />
+  <meta name="theme-color" content="#07070a" />
 
- 
+  <!-- Sosyal paylaşım önizlemesi (WhatsApp / Instagram / vs.) -->
   <meta property="og:title" content="Dominor Media — Dijital Medya Ajansı" />
   <meta property="og:description" content="Markanızı dijitalde büyütüyoruz." />
   <meta property="og:type" content="website" />
- 
+  <meta property="og:locale" content="tr_TR" />
+  <!-- <meta property="og:image" content="images/og-image.jpg" /> -->
+
+  <link rel="icon" href="images/logo-icon.png" type="image/png" />
+  <link rel="apple-touch-icon" href="images/logo-icon.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300..800&display=swap" rel="stylesheet" />
 
   <link rel="stylesheet" href="style.css" />
+
+  <noscript><style>.loader{display:none!important}</style></noscript>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Dominor Media",
+    "description": "Sosyal medya yönetimi, içerik üretimi, reklam yönetimi ve e-ticaret çözümleri sunan dijital medya ajansı.",
+    "email": "dominordijitalpazarlama@gmail.com",
+    "telephone": "+905414159322",
+    "sameAs": ["https://instagram.com/dominormedia"]
+  }
+  </script>
 </head>
 
 <body>
 
- 
-  <header class="navbar" id="navbar">
-    <div class="container nav-inner">
-      <a href="#hero" class="logo">
-        <img src="images/logo-icon.png" alt="Dominor Media" class="logo-icon-img" />
-        DOMINOR<span>MEDIA</span>
+  <!-- ======================================================= -->
+  <!--  SVG İKON SETİ (emoji yok, hepsi çizgi ikon)            -->
+  <!-- ======================================================= -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <defs>
+      <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-arrow-up-right" viewBox="0 0 24 24"><path d="M7 17 17 7M8 7h9v9"/></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.8A8 8 0 1 1 21 12Z"/></symbol>
+      <symbol id="i-video" viewBox="0 0 24 24"><rect x="3" y="6" width="13" height="12" rx="3"/><path d="m16 10.5 5-3v9l-5-3"/></symbol>
+      <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/></symbol>
+      <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3.5 14.3 9l5.7 1.8-5.7 1.9L12 18.5l-2.3-5.8L4 10.8 9.7 9 12 3.5Z"/></symbol>
+      <symbol id="i-bag" viewBox="0 0 24 24"><path d="M5.5 8h13l-1 12h-11l-1-12Z"/><path d="M9 8V7a3 3 0 0 1 6 0v1"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="m8 14 3-3.5 3 2L19 7"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 8.5 8 5.5 8-5.5"/></symbol>
+      <symbol id="i-phone" viewBox="0 0 24 24"><path d="M5.5 4h3.2l1.7 4.4-2.1 1.4a11 11 0 0 0 5.9 5.9l1.4-2.1 4.4 1.7v3.2a2 2 0 0 1-2 2A15.5 15.5 0 0 1 3.5 6a2 2 0 0 1 2-2Z"/></symbol>
+      <symbol id="i-insta" viewBox="0 0 24 24"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="3.8"/><circle cx="17" cy="7" r=".6" fill="currentColor"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+      <symbol id="i-chev-l" viewBox="0 0 24 24"><path d="m14.5 6-6 6 6 6"/></symbol>
+      <symbol id="i-chev-r" viewBox="0 0 24 24"><path d="m9.5 6 6 6-6 6"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="M8.5 5.8v12.4a.6.6 0 0 0 .9.5l10-6.2a.6.6 0 0 0 0-1L9.4 5.3a.6.6 0 0 0-.9.5Z" fill="currentColor"/></symbol>
+      <symbol id="i-expand" viewBox="0 0 24 24"><path d="M14 4h6v6M10 20H4v-6M20 4l-7 7M4 20l7-7"/></symbol>
+    </defs>
+  </svg>
+
+  <a class="skip-link" href="#main">İçeriğe geç</a>
+
+  <!-- ======================================================= -->
+  <!--  AÇILIŞ (loader)                                        -->
+  <!-- ======================================================= -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-inner">
+      <img src="images/logo-icon.png" alt="" class="loader-logo" width="86" height="72" />
+      <div class="loader-bar"><span></span></div>
+    </div>
+  </div>
+
+  <div class="progress" id="progress" aria-hidden="true"></div>
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+  <!-- ======================================================= -->
+  <!--  ÜST MENÜ                                               -->
+  <!-- ======================================================= -->
+  <header class="nav" id="nav">
+    <div class="nav-pill">
+      <a href="#top" class="brand" aria-label="Dominor Media — ana sayfa">
+        <img src="images/logo-icon.png" alt="" width="36" height="30" />
+        <span class="brand-text"><b>DOMINOR</b><i>MEDIA</i></span>
       </a>
 
-      <nav class="nav-links" id="navLinks">
+      <nav class="nav-links" id="navLinks" aria-label="Ana menü">
+        <span class="nav-glider" aria-hidden="true"></span>
         <a href="#services">Hizmetler</a>
         <a href="#about">Hakkımızda</a>
         <a href="#work">Çalışmalar</a>
-        <a href="#brands">Referanslar</a>
-        <a href="#team">Ekibimiz</a>
-        <a href="#gallery">Galeri</a>
-        <a href="#contact" class="nav-cta">İletişim</a>
+        <a href="#team">Ekip</a>
+        <a href="#gallery" data-gallery-link hidden>Galeri</a>
       </nav>
 
-      <button class="nav-toggle" id="navToggle" aria-label="Menü">
-        <span></span><span></span><span></span>
+      <a href="#contact" class="btn btn-primary btn-sm nav-cta" data-magnetic>İletişim</a>
+
+      <button class="burger" id="burger" type="button" aria-label="Menüyü aç" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span>
       </button>
     </div>
   </header>
 
- 
-  <section class="hero" id="hero">
-    <div class="hero-glow"></div>
-    <div class="container hero-inner">
-      <div class="hero-text">
-        <p class="eyebrow reveal">DOMINOR MEDIA — DİJİTAL MEDYA & E-TİCARET AJANSI</p>
-        <h1 class="reveal">Markanızı <span class="gold">dijitalde</span> büyütüyoruz.</h1>
-        <p class="hero-sub reveal">
-          Sosyal medya, içerik, reklam ve dijital pazarlama çözümleriyle
-          markaların dijital dünyadaki görünürlüğünü ve performansını güçlendiriyoruz.
-        </p>
-        <div class="hero-actions reveal">
-          <a href="#contact" class="btn btn-primary">Projeni Anlat</a>
-          <a href="#work" class="btn btn-ghost">Çalışmalarımızı İncele</a>
-        </div>
+  <!-- Mobil tam ekran menü -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <nav class="mm-links" aria-label="Mobil menü">
+      <a href="#services" style="--i:0"><small>01</small>Hizmetler</a>
+      <a href="#about" style="--i:1"><small>02</small>Hakkımızda</a>
+      <a href="#work" style="--i:2"><small>03</small>Çalışmalar</a>
+      <a href="#team" style="--i:3"><small>04</small>Ekip</a>
+      <a href="#gallery" style="--i:4" data-gallery-link hidden><small>05</small>Galeri</a>
+      <a href="#contact" style="--i:5"><small>06</small>İletişim</a>
+    </nav>
+    <div class="mm-foot">
+      <a href="mailto:dominordijitalpazarlama@gmail.com">dominordijitalpazarlama@gmail.com</a>
+      <a href="https://instagram.com/dominormedia" target="_blank" rel="noopener">@dominormedia</a>
+    </div>
+  </div>
+
+  <main id="main">
+
+    <!-- ===================================================== -->
+    <!--  HERO                                                 -->
+    <!-- ===================================================== -->
+    <section class="hero" id="top">
+      <div class="hero-bg" aria-hidden="true">
+        <span class="orb orb-1" data-parallax="0.18"></span>
+        <span class="orb orb-2" data-parallax="-0.12"></span>
+        <span class="orb orb-3" data-parallax="0.22"></span>
+        <span class="hero-lines"></span>
       </div>
 
-      <div class="hero-visual reveal">
-        <div class="hero-card">
-          <img src="images/logo.png" alt="Dominor Media" class="hero-logo" />
-          <div class="hero-badge">
-            <span class="hero-badge-num">40<span>+</span></span>
-            <span class="hero-badge-text">markayla büyüdük</span>
+      <div class="container hero-layout">
+        <div class="hero-copy">
+          <p class="chip" data-reveal><span class="chip-dot"></span>Dijital medya &amp; e-ticaret ajansı</p>
+
+          <h1 class="hero-title">
+            <span class="line"><span class="word" style="--i:0">Markanızı</span></span>
+            <span class="line"><span class="word serif grad" style="--i:1">dijitalde</span></span>
+            <span class="line"><span class="word" style="--i:2">büyütüyoruz.</span></span>
+          </h1>
+
+          <p class="lead" data-reveal style="--d:380ms">
+            Sosyal medya, içerik, reklam ve dijital pazarlama çözümleriyle markaların
+            dijital dünyadaki görünürlüğünü ve performansını güçlendiriyoruz.
+          </p>
+
+          <div class="hero-cta" data-reveal style="--d:480ms">
+            <a href="#contact" class="btn btn-primary" data-magnetic>
+              Projeni anlat
+              <svg class="i"><use href="#i-arrow-right"/></svg>
+            </a>
+            <a href="#work" class="btn btn-ghost" data-magnetic>Çalışmalarımızı incele</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" id="heroVisual" aria-hidden="true">
+          <div class="hv-item hv-a" data-depth="16" data-reveal style="--d:300ms">
+            <div class="hv-float" style="--fd:0s">
+              <figure class="hv-card">
+                <img src="images/brand-4.jpg" alt="" width="1600" height="900" decoding="async" fetchpriority="high" />
+                <figcaption class="hv-tag">Uçmakdere Dağ Evi<span>Turizm</span></figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="hv-item hv-b" data-depth="28" data-reveal style="--d:480ms">
+            <div class="hv-float" style="--fd:-3s">
+              <figure class="hv-card">
+                <img src="images/brand-8.jpg" alt="" width="1600" height="900" decoding="async" />
+                <figcaption class="hv-tag">Mado<span>Restoran &amp; Tatlı</span></figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="hv-item hv-c" data-depth="40" data-reveal style="--d:660ms">
+            <div class="hv-float" style="--fd:-6s">
+              <figure class="hv-card">
+                <img src="images/brand-5.jpg" alt="" width="1600" height="900" decoding="async" />
+                <figcaption class="hv-tag">BigChefs<span>Restoran</span></figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <div class="hv-item hv-stat" data-depth="52" data-reveal style="--d:820ms">
+            <div class="hv-float" style="--fd:-2s">
+              <div class="glass stat-chip">
+                <b class="grad">50+</b>
+                <span>mutlu marka</span>
+              </div>
+            </div>
+          </div>
+          <div class="hv-item hv-mark" data-depth="34" data-reveal style="--d:900ms">
+            <div class="hv-float" style="--fd:-4s">
+              <div class="glass mark-chip"><img src="images/logo-icon.png" alt="" width="40" height="34" /></div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
 
- 
-  <section class="stats">
-    <div class="container stats-grid">
-      <div class="stat reveal"><span class="stat-num" data-target="50">0</span><span class="plus">+</span><p>Mutlu Marka</p></div>
-      <div class="stat reveal"><span class="stat-num" data-target="120">0</span><span class="plus">+</span><p>Tamamlanan Proje</p></div>
-      <div class="stat reveal"><span class="stat-num" data-target="10">0</span><span class="plus">M+</span><p>Toplam Erişim</p></div>
-      <div class="stat reveal"><span class="stat-num" data-target="5">0</span><span class="plus">+</span><p>Yıllık Tecrübe</p></div>
-    </div>
-  </section>
+      <div class="scroll-hint" aria-hidden="true"><span>Keşfet</span><i></i></div>
+    </section>
 
-
-  <section class="services" id="services">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow">NE YAPIYORUZ</p>
-        <h2>Hizmetlerimiz</h2>
-        <p class="section-sub">Markanızın ihtiyacı olan her şey tek bir çatı altında.</p>
+    <!-- ===================================================== -->
+    <!--  REFERANS ŞERİDİ                                      -->
+    <!-- ===================================================== -->
+    <section class="marquee" aria-label="Birlikte çalıştığımız markalar">
+      <div class="marquee-track">
+        <div class="marquee-group">
+          <span>Coffee Limee</span><i></i><span>Unique Team</span><i></i><span>Take Off</span><i></i><span>Uçmakdere Dağ Evi</span><i></i>
+          <span>BigChefs</span><i></i><span>Bungalovcum</span><i></i><span>Arçelik</span><i></i><span>Mado</span><i></i>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <span>Coffee Limee</span><i></i><span>Unique Team</span><i></i><span>Take Off</span><i></i><span>Uçmakdere Dağ Evi</span><i></i>
+          <span>BigChefs</span><i></i><span>Bungalovcum</span><i></i><span>Arçelik</span><i></i><span>Mado</span><i></i>
+        </div>
       </div>
+    </section>
 
-      <div class="cards">
-        <article class="card reveal">
-          <div class="card-icon">📱</div>
-          <h3>Sosyal Medya Yönetimi</h3>
-          <p>Instagram, TikTok, X ve LinkedIn hesaplarınızı stratejik olarak yönetiyor, topluluğunuzu büyütüyoruz.</p>
-        </article>
-
-        <article class="card reveal">
-          <div class="card-icon">🎬</div>
-          <h3>İçerik Üretimi</h3>
-          <p>Reels, tasarım, fotoğraf ve video prodüksiyonu ile markanıza özgün ve akılda kalıcı içerikler.</p>
-        </article>
-
-        <article class="card reveal">
-          <div class="card-icon">🎯</div>
-          <h3>Reklam Yönetimi</h3>
-          <p>Meta Ads ve Google Ads kampanyalarıyla doğru kitleye ulaşıp satışlarınızı artırıyoruz.</p>
-        </article>
-
-        <article class="card reveal">
-          <div class="card-icon">✨</div>
-          <h3>Marka Kimliği</h3>
-          <p>Logo, renk paleti ve görsel dil ile markanızı rakiplerinden ayrıştıran güçlü bir kimlik.</p>
-        </article>
-
-        <article class="card reveal">
-          <div class="card-icon">🛒</div>
-          <h3>E-Ticaret Çözümleri</h3>
-          <p>Mağaza kurulumundan ürün yönetimine, dönüşüm odaklı e-ticaret operasyonu.</p>
-        </article>
-
-        <article class="card reveal">
-          <div class="card-icon">📈</div>
-          <h3>SEO & Analiz</h3>
-          <p>Arama motorlarında görünürlük ve veriye dayalı raporlarla sürdürülebilir büyüme.</p>
-        </article>
+    <!-- ===================================================== -->
+    <!--  İSTATİSTİKLER (rakamları kendine göre değiştir)      -->
+    <!-- ===================================================== -->
+    <section class="stats section-tight">
+      <div class="container">
+        <div class="stats-grid glass" data-reveal>
+          <div class="stat"><div class="stat-num"><span class="count grad" data-target="50" data-suffix="+">50+</span></div><p>Mutlu marka</p></div>
+          <div class="stat"><div class="stat-num"><span class="count grad" data-target="120" data-suffix="+">120+</span></div><p>Tamamlanan proje</p></div>
+          <div class="stat"><div class="stat-num"><span class="count grad" data-target="10" data-suffix="M+">10M+</span></div><p>Toplam erişim</p></div>
+          <div class="stat"><div class="stat-num"><span class="count grad" data-target="5" data-suffix="+">5+</span></div><p>Yıllık tecrübe</p></div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
- 
-  <section class="about" id="about">
-    <div class="container about-inner">
-      <div class="about-media reveal">
-        <!-- FOTO: images/ klasörüne about.jpg at, otomatik gelir -->
-        <div class="work-media"><img src="images/about.jpg" alt="Dominor Media" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" /></div>
+    <!-- ===================================================== -->
+    <!--  HİZMETLER                                            -->
+    <!-- ===================================================== -->
+    <section class="section" id="services">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">Ne yapıyoruz</p>
+          <h2 class="h2">Markanızın ihtiyacı olan her şey, <span class="serif grad">tek çatı</span> altında.</h2>
+        </header>
+
+        <div class="bento" data-stagger>
+          <article class="svc" data-reveal style="--accent:139,92,246">
+            <div class="svc-top"><span class="svc-icon"><svg class="i"><use href="#i-chat"/></svg></span><span class="svc-no">01</span></div>
+            <div class="svc-body">
+              <h3>Sosyal Medya Yönetimi</h3>
+              <p>Instagram, TikTok, X ve LinkedIn hesaplarınızı stratejik olarak yönetiyor, topluluğunuzu büyütüyoruz.</p>
+              <ul class="tags"><li>Instagram</li><li>TikTok</li><li>X</li><li>LinkedIn</li></ul>
+            </div>
+          </article>
+
+          <article class="svc" data-reveal style="--accent:224,57,138">
+            <div class="svc-top"><span class="svc-icon"><svg class="i"><use href="#i-video"/></svg></span><span class="svc-no">02</span></div>
+            <div class="svc-body">
+              <h3>İçerik Üretimi</h3>
+              <p>Reels, tasarım, fotoğraf ve video prodüksiyonu ile markanıza özgün ve akılda kalıcı içerikler.</p>
+              <ul class="tags"><li>Reels</li><li>Fotoğraf</li><li>Video</li></ul>
+            </div>
+          </article>
+
+          <article class="svc" data-reveal style="--accent:242,147,61">
+            <div class="svc-top"><span class="svc-icon"><svg class="i"><use href="#i-target"/></svg></span><span class="svc-no">03</span></div>
+            <div class="svc-body">
+              <h3>Reklam Yönetimi</h3>
+              <p>Meta Ads ve Google Ads kampanyalarıyla doğru kitleye ulaşıp satışlarınızı artırıyoruz.</p>
+              <ul class="tags"><li>Meta Ads</li><li>Google Ads</li></ul>
+            </div>
+          </article>
+
+          <article class="svc" data-reveal style="--accent:139,92,246">
+            <div class="svc-top"><span class="svc-icon"><svg class="i"><use href="#i-spark"/></svg></span><span class="svc-no">04</span></div>
+            <div class="svc-body">
+              <h3>Marka Kimliği</h3>
+              <p>Logo, renk paleti ve görsel dil ile markanızı rakiplerinden ayrıştıran güçlü bir kimlik.</p>
+              <ul class="tags"><li>Logo</li><li>Renk paleti</li><li>Görsel dil</li></ul>
+            </div>
+          </article>
+
+          <article class="svc" data-reveal style="--accent:224,57,138">
+            <div class="svc-top"><span class="svc-icon"><svg class="i"><use href="#i-bag"/></svg></span><span class="svc-no">05</span></div>
+            <div class="svc-body">
+              <h3>E-Ticaret Çözümleri</h3>
+              <p>Mağaza kurulumundan ürün yönetimine, dönüşüm odaklı e-ticaret operasyonu.</p>
+              <ul class="tags"><li>Mağaza kurulumu</li><li>Ürün yönetimi</li></ul>
+            </div>
+          </article>
+
+          <article class="svc" data-reveal style="--accent:242,147,61">
+            <div class="svc-top"><span class="svc-icon"><svg class="i"><use href="#i-chart"/></svg></span><span class="svc-no">06</span></div>
+            <div class="svc-body">
+              <h3>SEO &amp; Analiz</h3>
+              <p>Arama motorlarında görünürlük ve veriye dayalı raporlarla sürdürülebilir büyüme.</p>
+              <ul class="tags"><li>SEO</li><li>Raporlama</li></ul>
+            </div>
+          </article>
+        </div>
       </div>
-      <div class="about-text reveal">
-        <p class="eyebrow">BİZ KİMİZ</p>
-        <h2>Dijitalde fark yaratan bir ekip</h2>
-        <p>
-          Dominor Media olarak markaların dijital dünyada güçlü, tutarlı ve
-          gerçekten sonuç getiren bir varlık kurmasına yardımcı oluyoruz.
-          Sadece içerik üretmiyor; strateji, tasarım ve reklamı bir araya
-          getirerek büyümenizi sağlıyoruz.
-        </p>
-        <ul class="about-list">
-          <li>Markanıza özel strateji</li>
-          <li>Şeffaf raporlama</li>
-          <li>Veriye dayalı reklam yönetimi</li>
-          <li>7/24 destek</li>
-        </ul>
-        <a href="#contact" class="btn btn-primary">Bizimle Çalış</a>
+    </section>
+
+    <!-- ===================================================== -->
+    <!--  HAKKIMIZDA                                           -->
+    <!--  Görsel: images/work-1.jpg (aynı adla değiştirebilirsin) -->
+    <!-- ===================================================== -->
+    <section class="section about" id="about">
+      <div class="container about-layout">
+        <div class="about-media" data-reveal>
+          <div class="am-photo" data-parallax-root>
+            <img src="images/work-1.jpg" alt="Dominor Media çekimi" width="800" height="562" loading="lazy" decoding="async" data-img />
+          </div>
+          <div class="glass am-badge am-badge-top">
+            <b class="grad">5+</b>
+            <span>yıllık tecrübe</span>
+          </div>
+          <div class="glass am-badge am-badge-bottom">
+            <img src="images/logo-icon.png" alt="" width="40" height="34" />
+            <span><b>Dominor Media</b>Dijital pazarlama ajansı</span>
+          </div>
+        </div>
+
+        <div class="about-copy">
+          <p class="eyebrow" data-reveal>Biz kimiz</p>
+          <h2 class="h2" data-reveal style="--d:80ms">Dijitalde <span class="serif grad">fark yaratan</span> bir ekip</h2>
+          <p class="body-lg" data-reveal style="--d:160ms">
+            Dominor Media olarak markaların dijital dünyada güçlü, tutarlı ve gerçekten sonuç getiren
+            bir varlık kurmasına yardımcı oluyoruz. Sadece içerik üretmiyor; strateji, tasarım ve
+            reklamı bir araya getirerek büyümenizi sağlıyoruz.
+          </p>
+
+          <ul class="feature-list" data-stagger>
+            <li data-reveal><span class="tick"><svg class="i"><use href="#i-check"/></svg></span>Markanıza özel strateji</li>
+            <li data-reveal><span class="tick"><svg class="i"><use href="#i-check"/></svg></span>Şeffaf raporlama</li>
+            <li data-reveal><span class="tick"><svg class="i"><use href="#i-check"/></svg></span>Veriye dayalı reklam yönetimi</li>
+            <li data-reveal><span class="tick"><svg class="i"><use href="#i-check"/></svg></span>7/24 destek</li>
+          </ul>
+
+          <div data-reveal style="--d:200ms">
+            <a href="#contact" class="btn btn-primary" data-magnetic>Bizimle çalış <svg class="i"><use href="#i-arrow-right"/></svg></a>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
+    <!-- ===================================================== -->
+    <!--  ÇALIŞMALAR & REFERANSLAR                             -->
+    <!--  Görseller: images/brand-1.jpg ... brand-8.jpg        -->
+    <!-- ===================================================== -->
+    <section class="section" id="work">
+      <div class="container">
+        <header class="section-head split" data-reveal>
+          <div>
+            <p class="eyebrow">Çalışmalar</p>
+            <h2 class="h2">Birlikte <span class="serif grad">büyüdüğümüz</span> markalar</h2>
+          </div>
+          <p class="body-lg">Farklı sektörlerden markalar için ürettiğimiz seçili işler. Büyütmek için bir görsele dokunun.</p>
+        </header>
 
-  <section class="work" id="work">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow">PORTFOLYO</p>
-        <h2>Son Çalışmalarımız</h2>
+        <div class="work-grid">
+          <figure class="work-card" data-reveal>
+            <button class="work-media" type="button" data-lightbox="work" data-caption="Coffee Limee — Kafe" aria-label="Coffee Limee görselini büyüt">
+              <img src="images/brand-1.jpg" alt="Coffee Limee ve Dominor Media iş birliği görseli" width="1600" height="900" loading="lazy" decoding="async" data-img />
+              <span class="work-view"><svg class="i"><use href="#i-expand"/></svg>Görüntüle</span>
+            </button>
+            <figcaption><span class="work-idx">01</span><span class="work-name">Coffee Limee</span><span class="work-cat">Kafe</span></figcaption>
+          </figure>
+
+          <figure class="work-card" data-reveal>
+            <button class="work-media" type="button" data-lightbox="work" data-caption="Unique Team — Gayrimenkul" aria-label="Unique Team görselini büyüt">
+              <img src="images/brand-2.jpg" alt="Unique Team ve Dominor Media iş birliği görseli" width="1600" height="900" loading="lazy" decoding="async" data-img />
+              <span class="work-view"><svg class="i"><use href="#i-expand"/></svg>Görüntüle</span>
+            </button>
+            <figcaption><span class="work-idx">02</span><span class="work-name">Unique Team</span><span class="work-cat">Gayrimenkul</span></figcaption>
+          </figure>
+
+          <figure class="work-card" data-reveal>
+            <button class="work-media" type="button" data-lightbox="work" data-caption="Take Off — Moda &amp; Ayakkabı" aria-label="Take Off görselini büyüt">
+              <img src="images/brand-3.jpg" alt="Take Off ve Dominor Media iş birliği görseli" width="1600" height="900" loading="lazy" decoding="async" data-img />
+              <span class="work-view"><svg class="i"><use href="#i-expand"/></svg>Görüntüle</span>
+            </button>
+            <figcaption><span class="work-idx">03</span><span class="work-name">Take Off</span><span class="work-cat">Moda &amp; Ayakkabı</span></figcaption>
+          </figure>
+
+          <figure class="work-card" data-reveal>
+            <button class="work-media" type="button" data-lightbox="work" data-caption="Uçmakdere Dağ Evi — Turizm &amp; Konaklama" aria-label="Uçmakdere Dağ Evi görselini büyüt">
+              <img src="images/brand-4.jpg" alt="Uçmakdere Dağ Evi ve Dominor Media iş birliği görseli" width="1600" height="900" loading="lazy" decoding="async" data-img />
+              <span class="work-view"><svg class="i"><use href="#i-expand"/></svg>Görüntüle</span>
+            </button>
+            <figcaption><span class="work-idx">04</span><span class="work-name">Uçmakdere Dağ Evi</span><span class="work-cat">Turizm &amp; Konaklama</span></figcaption>
+          </figure>
+
+          <figure class="work-card" data-reveal>
+            <button class="work-media" type="button" data-lightbox="work" data-caption="BigChefs — Restoran" aria-label="BigChefs görselini büyüt">
+              <img src="images/brand-5.jpg" alt="BigChefs ve Dominor Media iş birliği görseli" width="1600" height="900" loading="lazy" decoding="async" data-img />
+              <span class="work-view"><svg class="i"><use href="#i-expand"/></svg>Görüntüle</span>
+            </button>
+            <figcaption><span class="work-idx">05</span><span class="work-name">BigChefs</span><span class="work-cat">Restoran</span></figcaption>
+          </figure>
+
+          <figure class="work-card" data-reveal>
+            <button class="work-media" type="button" data-lightbox="work" data-caption="Bungalovcum — Turizm &amp; Konaklama" aria-label="Bungalovcum görselini büyüt">
+              <img src="images/brand-6.jpg" alt="Bungalovcum ve Dominor Media iş birliği görseli" width="1600" height="900" loading="lazy" decoding="async" data-img />
+              <span class="work-view"><svg class="i"><use href="#i-expand"/></svg>Görüntüle</span>
+            </button>
+            <figcaption><span class="work-idx">06</span><span class="work-name">Bungalovcum</span><span class="work-cat">Turizm &amp; Konaklama</span></figcaption>
+          </figure>
+
+          <figure class="work-card" data-reveal>
+            <button class="work-media" type="button" data-lightbox="work" data-caption="Arçelik — Elektronik &amp; Beyaz Eşya" aria-label="Arçelik görselini büyüt">
+              <img src="images/brand-7.jpg" alt="Arçelik ve Dominor Media iş birliği görseli" width="1600" height="900" loading="lazy" decoding="async" data-img />
+              <span class="work-view"><svg class="i"><use href="#i-expand"/></svg>Görüntüle</span>
+            </button>
+            <figcaption><span class="work-idx">07</span><span class="work-name">Arçelik</span><span class="work-cat">Elektronik &amp; Beyaz Eşya</span></figcaption>
+          </figure>
+
+          <figure class="work-card" data-reveal>
+            <button class="work-media" type="button" data-lightbox="work" data-caption="Mado — Restoran &amp; Tatlı" aria-label="Mado görselini büyüt">
+              <img src="images/brand-8.jpg" alt="Mado ve Dominor Media iş birliği görseli" width="1600" height="900" loading="lazy" decoding="async" data-img />
+              <span class="work-view"><svg class="i"><use href="#i-expand"/></svg>Görüntüle</span>
+            </button>
+            <figcaption><span class="work-idx">08</span><span class="work-name">Mado</span><span class="work-cat">Restoran &amp; Tatlı</span></figcaption>
+          </figure>
+        </div>
       </div>
+    </section>
 
-      <div class="gallery">
-    
-        <figure class="work-item reveal"><div class="work-media"><img src="images/work-1.jpg" alt="Proje 1" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" /></div><figcaption>Proje Başlığı 1</figcaption></figure>
-        <figure class="work-item reveal"><div class="work-media"><img src="images/work-2.jpg" alt="Proje 2" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" /></div><figcaption>Proje Başlığı 2</figcaption></figure>
-        <figure class="work-item reveal"><div class="work-media"><img src="images/work-3.jpg" alt="Proje 3" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" /></div><figcaption>Proje Başlığı 3</figcaption></figure>
-        <figure class="work-item reveal"><div class="work-media"><img src="images/work-4.jpg" alt="Proje 4" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" /></div><figcaption>Proje Başlığı 4</figcaption></figure>
-        <figure class="work-item reveal"><div class="work-media"><img src="images/work-5.jpg" alt="Proje 5" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" /></div><figcaption>Proje Başlığı 5</figcaption></figure>
-        <figure class="work-item reveal"><div class="work-media"><img src="images/work-6.jpg" alt="Proje 6" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" /></div><figcaption>Proje Başlığı 6</figcaption></figure>
+    <!-- ===================================================== -->
+    <!--  EKİP                                                 -->
+    <!--  Fotoğraflar: images/team-1.jpg ... team-4.jpg        -->
+    <!-- ===================================================== -->
+    <section class="section" id="team">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow">Ekibimiz</p>
+          <h2 class="h2">Bu işin <span class="serif grad">arkasındaki</span> ekip.</h2>
+        </header>
+
+        <div class="team-grid" data-stagger>
+          <article class="team-card" data-reveal>
+            <div class="team-photo"><img src="images/team-1.jpg" alt="Cesur Kaya" width="800" height="800" loading="lazy" decoding="async" data-img /></div>
+            <h3>Cesur Kaya</h3>
+            <p class="team-role">Creative / Digital Marketing</p>
+            <p class="team-desc">Marka stratejisinden içerik yönüne kadar dijital tarafı uçtan uca kurar.</p>
+          </article>
+
+          <article class="team-card" data-reveal>
+            <div class="team-photo"><img src="images/team-2.jpg" alt="Kuzey Kakaş" width="800" height="800" loading="lazy" decoding="async" data-img /></div>
+            <h3>Kuzey Kakaş</h3>
+            <p class="team-role">Sosyal Medya Yöneticisi</p>
+            <p class="team-desc">İçerik takvimini ve topluluk yönetimini marka diline sadık kalarak yürütür.</p>
+          </article>
+
+          <article class="team-card" data-reveal>
+            <div class="team-photo"><img src="images/team-3.jpg" alt="Loran Gavloski" width="800" height="800" loading="lazy" decoding="async" data-img /></div>
+            <h3>Loran Gavloski</h3>
+            <p class="team-role">Görsel Yönetmen</p>
+            <p class="team-desc">Fotoğraf ve video prodüksiyonunda sahne kurgusundan renk yönetimine kadar sorumlu.</p>
+          </article>
+
+          <article class="team-card" data-reveal>
+            <div class="team-photo"><img src="images/team-4.jpg" alt="Baki Çağlar" width="800" height="800" loading="lazy" decoding="async" data-img /></div>
+            <h3>Baki Çağlar</h3>
+            <p class="team-role">Performans Reklam Uzmanı</p>
+            <p class="team-desc">Meta ve Google Ads kampanyalarını veriyle optimize eder.</p>
+          </article>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
 
+    <!-- ===================================================== -->
+    <!--  GALERİ (Supabase'ten canlı)                          -->
+    <!--  İçerik yoksa ya da bağlantı kurulmadıysa gizli kalır -->
+    <!-- ===================================================== -->
+    <section class="section gallery-section" id="gallery" hidden>
+      <div class="container">
+        <header class="section-head split" data-reveal>
+          <div>
+            <p class="eyebrow">Galeri</p>
+            <h2 class="h2">Foto &amp; <span class="serif grad">video</span> galerisi</h2>
+          </div>
+          <p class="body-lg">Son çekimlerimizden ve üretimlerimizden seçmeler.</p>
+        </header>
 
-  <section class="brands" id="brands">
-    <div class="container">
-      <div class="section-head team-head reveal">
-        <p class="eyebrow">REFERANSLAR</p>
-        <h2>Birlikte büyüdüğümüz markalar</h2>
+        <div class="segmented" id="galleryFilter" role="tablist" aria-label="Galeri filtresi" data-reveal>
+          <span class="seg-glider" aria-hidden="true"></span>
+          <button type="button" class="seg-btn active" data-filter="all" role="tab" aria-selected="true">Tümü</button>
+          <button type="button" class="seg-btn" data-filter="image" role="tab" aria-selected="false">Fotoğraflar</button>
+          <button type="button" class="seg-btn" data-filter="video" role="tab" aria-selected="false">Videolar</button>
+        </div>
+
+        <div class="gallery-grid" id="galleryGrid"></div>
       </div>
+    </section>
 
-      <div class="brands-grid">
-        <a class="brand-card reveal" href="#contact">
-          <div class="brand-media"><img src="images/brand-1.jpg" alt="Coffee Limee" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" data-name="brand-1.jpg" /></div>
-          <div class="brand-info"><h3>Coffee Limee</h3><p class="brand-cat">Kafe</p></div>
-        </a>
-        <a class="brand-card reveal" href="#contact">
-          <div class="brand-media"><img src="images/brand-2.jpg" alt="Unique Team" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" data-name="brand-2.jpg" /></div>
-          <div class="brand-info"><h3>Unique Team</h3><p class="brand-cat">Gayrimenkul</p></div>
-        </a>
-        <a class="brand-card reveal" href="#contact">
-          <div class="brand-media"><img src="images/brand-3.jpg" alt="Take Off" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" data-name="brand-3.jpg" /></div>
-          <div class="brand-info"><h3>Take Off</h3><p class="brand-cat">Moda & Ayakkabı</p></div>
-        </a>
-        <a class="brand-card reveal" href="#contact">
-          <div class="brand-media"><img src="images/brand-4.jpg" alt="Uçmakdere Dağ Evi" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" data-name="brand-4.jpg" /></div>
-          <div class="brand-info"><h3>Uçmakdere Dağ Evi</h3><p class="brand-cat">Turizm & Konaklama</p></div>
-        </a>
-        <a class="brand-card reveal" href="#contact">
-          <div class="brand-media"><img src="images/brand-5.jpg" alt="BigChefs" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" data-name="brand-5.jpg" /></div>
-          <div class="brand-info"><h3>BigChefs</h3><p class="brand-cat">Restoran</p></div>
-        </a>
-        <a class="brand-card reveal" href="#contact">
-          <div class="brand-media"><img src="images/brand-6.jpg" alt="Bungalovcum" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" data-name="brand-6.jpg" /></div>
-          <div class="brand-info"><h3>Bungalovcum</h3><p class="brand-cat">Tatil & Konaklama</p></div>
-        </a>
-        <a class="brand-card reveal" href="#contact">
-          <div class="brand-media"><img src="images/brand-7.jpg" alt="Arçelik" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" data-name="brand-7.jpg" /></div>
-          <div class="brand-info"><h3>Arçelik</h3><p class="brand-cat">Restoran & Tatlı</p></div>
-        </a>
-        <a class="brand-card reveal" href="#contact">
-          <div class="brand-media"><img src="images/brand-8.jpg" alt="Mado" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" data-name="brand-8.jpg" /></div>
-          <div class="brand-info"><h3>Mado</h3><p class="brand-cat">Restoran & Fast Food</p></div>
-        </a>
+    <!-- ===================================================== -->
+    <!--  İLETİŞİM                                             -->
+    <!-- ===================================================== -->
+    <section class="section contact" id="contact">
+      <div class="contact-glow" aria-hidden="true"></div>
+      <div class="container contact-layout">
+        <div class="contact-copy">
+          <p class="eyebrow" data-reveal>İletişim</p>
+          <h2 class="h2 h2-xl" data-reveal style="--d:80ms">Projenizi <span class="serif grad">konuşalım.</span></h2>
+          <p class="body-lg" data-reveal style="--d:160ms">Markanızı bir sonraki seviyeye taşımaya hazırsanız, formu doldurun ya da doğrudan bize ulaşın.</p>
+
+          <!-- Bilgileri kendine göre düzenle -->
+          <ul class="contact-list" data-stagger>
+            <li data-reveal>
+              <a href="mailto:dominordijitalpazarlama@gmail.com" class="contact-row">
+                <span class="cr-icon"><svg class="i"><use href="#i-mail"/></svg></span>
+                <span class="cr-text"><small>E-posta</small>dominordijitalpazarlama@gmail.com</span>
+                <svg class="i cr-arrow"><use href="#i-arrow-up-right"/></svg>
+              </a>
+            </li>
+            <li data-reveal>
+              <a href="https://wa.me/905414159322" target="_blank" rel="noopener" class="contact-row">
+                <span class="cr-icon"><svg class="i"><use href="#i-phone"/></svg></span>
+                <span class="cr-text"><small>WhatsApp</small>+90 541 415 93 22</span>
+                <svg class="i cr-arrow"><use href="#i-arrow-up-right"/></svg>
+              </a>
+            </li>
+            <li data-reveal>
+              <a href="https://instagram.com/dominormedia" target="_blank" rel="noopener" class="contact-row">
+                <span class="cr-icon"><svg class="i"><use href="#i-insta"/></svg></span>
+                <span class="cr-text"><small>Instagram</small>@dominormedia</span>
+                <svg class="i cr-arrow"><use href="#i-arrow-up-right"/></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Form gönderildiğinde mesajı doğrudan Telegram botuna iletir.
+             Bot ayarları script.js dosyasının en üstündedir. -->
+        <div class="form-card glass" id="formCard" data-reveal style="--d:120ms">
+          <form class="form" id="contactForm" novalidate>
+            <div class="field">
+              <input type="text" id="name" name="name" placeholder=" " autocomplete="name" required />
+              <label for="name">Adınız</label>
+            </div>
+            <div class="field">
+              <input type="email" id="email" name="email" placeholder=" " autocomplete="email" required />
+              <label for="email">E-posta adresiniz</label>
+            </div>
+            <div class="field">
+              <input type="text" id="subject" name="subject" placeholder=" " />
+              <label for="subject">Konu (isteğe bağlı)</label>
+            </div>
+            <div class="field">
+              <textarea id="message" name="message" rows="5" placeholder=" " required></textarea>
+              <label for="message">Mesajınız</label>
+            </div>
+
+            <!-- Bot tuzağı: gerçek kullanıcılar bu alanı görmez -->
+            <input type="text" id="website" name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+            <button type="submit" class="btn btn-primary btn-block" id="submitBtn">
+              <span class="btn-label">Gönder</span>
+              <svg class="i btn-arrow"><use href="#i-arrow-right"/></svg>
+              <span class="spinner" aria-hidden="true"></span>
+            </button>
+            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+          </form>
+
+          <div class="form-success" id="formSuccess" hidden>
+            <span class="success-mark"><svg class="i"><use href="#i-check"/></svg></span>
+            <h3>Mesajınız bize ulaştı.</h3>
+            <p>Teşekkürler. En kısa sürede size dönüş yapacağız.</p>
+            <button type="button" class="btn btn-ghost" id="formAgain">Yeni mesaj yaz</button>
+          </div>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-
-  <section class="team" id="team">
-    <div class="container">
-      <div class="section-head team-head reveal">
-        <p class="eyebrow">EKİBİMİZ</p>
-        <h2>Bu işin arkasındaki ekip.</h2>
-      </div>
-
-      <div class="team-grid">
-        <article class="team-card reveal">
-          <div class="team-photo"><img src="images/team-1.jpg" alt="Cesur Kaya" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" /></div>
-          <h3>Cesur Kaya</h3>
-          <p class="team-role">Creative / Digital Marketing</p>
-          <p class="team-desc">Marka stratejisinden içerik yönüne kadar dijital tarafı uçtan uca kurar.</p>
-        </article>
-
-        <article class="team-card reveal">
-          <div class="team-photo"><img src="images/team-2.jpg" alt="Kuzey Kakaş" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" /></div>
-          <h3>Kuzey Kakaş</h3>
-          <p class="team-role">Sosyal Medya Yöneticisi</p>
-          <p class="team-desc">İçerik takvimini ve topluluk yönetimini marka diline sadık kalarak yürütür.</p>
-        </article>
-
-        <article class="team-card reveal">
-          <div class="team-photo"><img src="images/team-3.jpg" alt="Loran Gavloski" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" /></div>
-          <h3>Loran Gavloski</h3>
-          <p class="team-role">Görsel Yönetmen</p>
-          <p class="team-desc">Fotoğraf ve video prodüksiyonunda sahne kurgusundan renk yönetimine kadar sorumlu.</p>
-        </article>
-
-        <article class="team-card reveal">
-          <div class="team-photo"><img src="images/team-4.jpg" alt="Baki Çağlar" onerror="this.style.display='none';this.parentElement.classList.add('no-img')" /></div>
-          <h3>Baki Çağlar</h3>
-          <p class="team-role">Performans Reklam Uzmanı</p>
-          <p class="team-desc">Meta ve Google Ads kampanyalarını veriyle optimize eder.</p>
-        </article>
-      </div>
-    </div>
-  </section>
-
-
-  <section class="gallery-section" id="gallery">
-    <div class="container">
-      <div class="section-head reveal">
-        <p class="eyebrow">GALERİ</p>
-        <h2>Foto & Video Galerisi</h2>
-      </div>
-
-  
-      <div class="gallery-filter reveal">
-        <button class="filter-btn active" data-filter="all">Tümü</button>
-        <button class="filter-btn" data-filter="image">Fotoğraflar</button>
-        <button class="filter-btn" data-filter="video">Videolar</button>
-      </div>
-
-    
-      <div class="gallery-grid" id="galleryGrid">
-        <p class="gallery-empty" id="galleryEmpty">Yükleniyor...</p>
-      </div>
-    </div>
-  </section>
-
-
-  <div class="lightbox" id="lightbox">
-    <button class="lightbox-close" id="lightboxClose" aria-label="Kapat">&times;</button>
-    <div class="lightbox-content" id="lightboxContent"></div>
-  </div>
-
-
-  <section class="contact" id="contact">
-    <div class="container contact-inner">
-      <div class="contact-text reveal">
-        <p class="eyebrow">İLETİŞİM</p>
-        <h2>Projenizi konuşalım</h2>
-        <p>Markanızı bir sonraki seviyeye taşımaya hazırsanız, formu doldurun ya da doğrudan bize ulaşın.</p>
-
-        <ul class="contact-info">
-     
-          <li><strong>E-posta:</strong> <a href="mailto:dominordijitalpazarlama@gmail.com">dominordijitalpazarlama@gmail.com</a></li>
-          <li><strong>WhatsApp:</strong> <a href="https://wa.me/905414159322" target="_blank" rel="noopener">+90 541 415 93 22</a></li>
-          <li><strong>Instagram:</strong> <a href="https://instagram.com/dominormedia" target="_blank" rel="noopener">@dominormedia</a></li>
-        </ul>
-      </div>
-
-  
-      <form class="contact-form reveal" id="contactForm">
-        <input type="text" id="name" placeholder="Adınız" required />
-        <input type="email" id="email" placeholder="E-posta adresiniz" required />
-        <input type="text" id="subject" placeholder="Konu" />
-        <textarea id="message" placeholder="Mesajınız..." rows="5" required></textarea>
-        <button type="submit" class="btn btn-primary" id="submitBtn">Gönder</button>
-        <p class="form-status" id="formStatus"></p>
-      </form>
-    </div>
-  </section>
-
-
+  <!-- ======================================================= -->
+  <!--  FOOTER                                                 -->
+  <!-- ======================================================= -->
   <footer class="footer">
-    <div class="container footer-inner">
-      <a href="#hero" class="logo">DOMINOR<span>MEDIA</span></a>
-      <p class="footer-copy">© <span id="year"></span> Dominor Media. Tüm hakları saklıdır.</p>
-      <div class="footer-social">
-        <a href="https://instagram.com/dominormedia" target="_blank" rel="noopener">Instagram</a>
-        <a href="https://wa.me/905414159322" target="_blank" rel="noopener">WhatsApp</a>
-        <a href="mailto:dominordijitalpazarlama@gmail.com">E-posta</a>
+    <div class="container">
+      <div class="footer-top">
+        <a href="#top" class="brand" aria-label="Başa dön">
+          <img src="images/logo-icon.png" alt="" width="36" height="30" />
+          <span class="brand-text"><b>DOMINOR</b><i>MEDIA</i></span>
+        </a>
+
+        <nav class="footer-nav" aria-label="Alt menü">
+          <a href="#services">Hizmetler</a>
+          <a href="#about">Hakkımızda</a>
+          <a href="#work">Çalışmalar</a>
+          <a href="#team">Ekip</a>
+          <a href="#contact">İletişim</a>
+        </nav>
+
+        <div class="footer-social">
+          <a href="https://instagram.com/dominormedia" target="_blank" rel="noopener" aria-label="Instagram"><svg class="i"><use href="#i-insta"/></svg></a>
+          <a href="https://wa.me/905414159322" target="_blank" rel="noopener" aria-label="WhatsApp"><svg class="i"><use href="#i-phone"/></svg></a>
+          <a href="mailto:dominordijitalpazarlama@gmail.com" aria-label="E-posta"><svg class="i"><use href="#i-mail"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-word" aria-hidden="true">DOMINOR</div>
+
+      <div class="footer-bottom">
+        <p>&copy; <span id="year">2026</span> Dominor Media. Tüm hakları saklıdır.</p>
+        <a href="#top" class="to-top" data-magnetic>Başa dön <svg class="i"><use href="#i-arrow-up-right"/></svg></a>
       </div>
     </div>
   </footer>
 
-  <script src="script.js"></script>
- 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="supabase-config.js"></script>
-  <script src="gallery.js"></script>
+  <!-- ======================================================= -->
+  <!--  LIGHTBOX (büyük görüntüleme)                           -->
+  <!-- ======================================================= -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Görsel görüntüleyici" hidden>
+    <div class="lb-backdrop" data-lb-close></div>
+    <button type="button" class="lb-btn lb-close" data-lb-close aria-label="Kapat"><svg class="i"><use href="#i-close"/></svg></button>
+    <button type="button" class="lb-btn lb-prev" id="lbPrev" aria-label="Önceki"><svg class="i"><use href="#i-chev-l"/></svg></button>
+    <button type="button" class="lb-btn lb-next" id="lbNext" aria-label="Sonraki"><svg class="i"><use href="#i-chev-r"/></svg></button>
+    <figure class="lb-stage">
+      <div class="lb-media" id="lbMedia"></div>
+      <figcaption class="lb-caption"><span id="lbCaption"></span><span id="lbCount"></span></figcaption>
+    </figure>
+  </div>
+
+  <script src="script.js" defer></script>
+  <!-- Supabase (galeri için) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer></script>
+  <script src="supabase-config.js" defer></script>
+  <script src="gallery.js" defer></script>
 </body>
 </html>

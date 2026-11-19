@@ -1,0 +1,9 @@
+# Eski sitenin yedeği (Telegram ayarlarını içerir, depoya girmesin)
+_eski-site-yedegi/
+
+# Araç / editör dosyaları
+.claude/
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store

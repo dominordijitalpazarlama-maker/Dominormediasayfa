@@ -4,13 +4,20 @@ Saf HTML/CSS/JS. Site build gerektirmez. Galeri ve admin paneli için ücretsiz
 **Supabase** kullanılır (sunucu yönetmen gerekmez).
 
 ## Dosyalar
-- `index.html` — ana sayfa (metinler, hero, hizmetler, galeri, iletişim)
+- `index.html` — ana sayfa (metinler, hero, hizmetler, hakkımızda, çalışmalar, ekip, galeri, iletişim)
 - `admin.html` — **admin paneli** (girişli; foto/video yükle-sil)
-- `style.css` — tasarım ve renkler (`:root` bloğundan değiştir)
-- `script.js` — menü, animasyon, iletişim formu (Telegram)
-- `gallery.js` — galeriyi Supabase'ten çeker
+- `style.css` — tasarım sistemi. Renkler, yazı tipleri ve animasyon hızları en üstteki `:root` bloğunda
+- `script.js` — açılış ekranı, menü, yumuşak kaydırma, animasyonlar, lightbox, iletişim formu (Telegram)
+- `gallery.js` — galeriyi Supabase'ten çeker (içerik yoksa galeri bölümü otomatik gizlenir)
 - `supabase-config.js` — **Supabase anahtarların buraya**
-- `images/` — logo ve görseller
+- `images/` — logo ve görseller (hangi dosya nerede kullanılıyor: `images/BURAYA-FOTO-EKLE.txt`)
+- `_eski-site-yedegi/` — yenilemeden önceki sitenin yedeği. **Yayına alırken bu klasörü yükleme**, işin bitince silebilirsin.
+
+## Sık yapılan düzenlemeler
+- **Rakamlar (50+ marka, 120+ proje...):** `index.html` içinde `class="stats"` bölümünde `data-target` değerleri.
+- **Yeni marka / çalışma:** `index.html` içinde `class="work-card"` bloklarından birini kopyala, görsel adını ve yazıları değiştir. Ana sayfadaki kayan marka şeridi için `class="marquee"` bölümüne de adını ekle (iki grupta da).
+- **Ekip üyesi:** `class="team-card"` bloklarını düzenle.
+- **Renkler:** `style.css` en üstte `--violet`, `--magenta`, `--orange` ve `--grad`.
 
 ---
 
@@ -85,3 +92,12 @@ dosyası aç, içine sadece alan adını yaz (örn. `dominormedia.com`).
 ## 4) İletişim formu
 Form, mesajı doğrudan **Telegram botuna** gönderir. Ayarlar `script.js` en üstünde
 (`TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`). Botun ilgili sohbete mesaj atma yetkisi olmalı.
+
+Forma ek olarak: boş/geçersiz alan kontrolü, bot tuzağı (gizli alan) ve art arda gönderimi
+30 saniyeyle sınırlayan koruma bulunur. Gönderim başarısız olursa ziyaretçiye WhatsApp
+bağlantısı gösterilir.
+
+> **Güvenlik notu:** Bu yapıda bot token'ı sitenin kodunda olduğu için sayfayı açan herkes
+> görebilir. Token'ı bilen biri botun adına mesaj gönderebilir. Daha güvenli seçenek:
+> BotFather'dan token'ı yenile (`/revoke`) ve formu bir aracıya (ör. Cloudflare Worker,
+> Formspree, Web3Forms) bağla; token o aracıda saklanır, sitede görünmez.
